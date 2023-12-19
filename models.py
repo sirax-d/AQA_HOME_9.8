@@ -91,8 +91,3 @@ class Cart:
         for product, quantity in self.products.items():
             product.buy(quantity)
         self.clear()
-        # for product in self.products:
-        #     if product.check_quantity(self.products[product]):
-        #         return product.buy(self.products[product])
-        #     else:
-        #         raise ValueError
