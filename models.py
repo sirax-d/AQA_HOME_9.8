@@ -69,7 +69,7 @@ class Cart:
         if remove_count is None:
             self.products.pop(product)
         else:
-            if remove_count >= self.products[product]:
+            if remove_count >= self.products.get(product, 0):
                 self.products.pop(product)
             else:
                 self.products[product] -= remove_count
@@ -88,9 +88,11 @@ class Cart:
         Учтите, что товаров может не хватать на складе.
         В этом случае нужно выбросить исключение ValueError
         """
-
-        for product in self.products:
-            if product.check_quantity(self.products[product]):
-                return product.buy(self.products[product])
-            else:
-                raise ValueError
+        for product, quantity in self.products.items():
+            product.buy(quantity)
+        self.clear()
+        # for product in self.products:
+        #     if product.check_quantity(self.products[product]):
+        #         return product.buy(self.products[product])
+        #     else:
+        #         raise ValueError
